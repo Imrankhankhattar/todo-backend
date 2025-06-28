@@ -24,5 +24,8 @@ jobs:
       #- name: Run tests
        # run: npm test  # Or comment out if you don’t have tests
 
-      - name: Notify Render (Auto Deploy)
-        run: echo "Render will auto-deploy since it's connected to this GitHub repo"
+      - name: Deploy to Render via Hook
+        run: |
+          curl "$RENDER_DEPLOY_HOOK"
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
