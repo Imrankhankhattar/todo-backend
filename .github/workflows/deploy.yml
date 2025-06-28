@@ -26,6 +26,7 @@ jobs:
 
       - name: Deploy to Render via Hook
         run: |
-          curl "$RENDER_DEPLOY_HOOK"
-        env:
-          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+          export PORT="${{ secrets.PORT }}"
+          export APP_NAME="${{ secrets.APP_NAME }}"
+          echo "Deploying $APP_NAME on port $PORT"
+          curl "${{ secrets.RENDER_DEPLOY_HOOK }}"
